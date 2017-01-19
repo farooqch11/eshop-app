@@ -1,0 +1,9 @@
+<h1>Welcome to my Eshop</h1>
+<%if user_signed_in? %>
+<p>You are logged in <%= link_to "Click to logout", destroy_user_session_path, :method => :get %></p>
+ <p>Create your order <%= link_to "here", new_order_path %></p>
+<%else%>
+    <p>You are logged in <%= link_to "Click to login", new_user_session_path %></p>
+
+<%end%>
+
