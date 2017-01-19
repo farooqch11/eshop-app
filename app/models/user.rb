@@ -20,7 +20,7 @@ class User < ApplicationRecord
   def self.find_for_database_authentication(warden_conditions)
     conditions = warden_conditions.dup
     if login = conditions.delete(:login)
-      where(conditions.to_hash).where(["numeric_id = :value OR alternative_numeric_id = :value OR lower(email) = :value", { :value => login.downcase }]).first
+      where(conditions.to_hash).where(["numeric_id = cast ( :value as int8)  OR alternative_numeric_id = cast ( :value as int8) OR lower(email) = :value", { :value => login.downcase }]).first
     elsif conditions.has_key?(:numeric_id) || conditions.has_key?(:alternative_numeric_id) || conditions.has_key?(:email)
       where(conditions.to_hash).first
     end
